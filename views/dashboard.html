@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard - NutriPlan</title>
   <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    html, body {
+    html,
+    body {
       height: 100%;
       margin: 0;
       font-family: 'Open Sans', sans-serif;
       background-color: #ffffff;
       scroll-behavior: smooth;
     }
+
     .dashboard-container {
       display: flex;
       height: 100vh;
     }
+
     .sidebar {
       width: 240px;
       background-color: #e6f4d7;
@@ -30,29 +35,35 @@
       top: 0;
       left: 0;
       overflow-y: auto;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
       z-index: 10;
     }
+
     .logo {
       text-align: center;
       margin-bottom: 30px;
     }
+
     .logo-img {
       width: 50px;
       margin-bottom: 10px;
     }
+
     .user-info {
       text-align: center;
       margin-bottom: 20px;
     }
+
     .user-avatar {
       width: 60px;
       border-radius: 50%;
       margin-bottom: 10px;
     }
+
     .sidebar-nav {
       width: 100%;
     }
+
     .sidebar-nav a {
       display: block;
       padding: 10px 15px;
@@ -62,12 +73,14 @@
       border-radius: 8px;
       transition: background-color 0.2s ease, color 0.2s ease;
     }
+
     .sidebar-nav a.active,
     .sidebar-nav a:hover {
       background-color: #87c440;
       color: #fff;
       font-weight: bold;
     }
+
     .sidebar-nav a.logout {
       background-color: transparent;
       color: #333;
@@ -76,11 +89,13 @@
       padding: 10px;
       margin-top: 20px;
     }
+
     .sidebar-nav a.logout:hover {
       background-color: #f8d7da;
       color: #a94442;
       border-color: #f5c6cb;
     }
+
     .main-content {
       margin-left: 300px;
       padding: 30px;
@@ -89,15 +104,18 @@
       background-color: #ffffff;
       width: calc(100% - 300px);
     }
+
     .generate-meal-plan {
       text-align: center;
       margin: 30px 0;
     }
+
     .generate-meal-plan h2 {
       margin-bottom: 15px;
       font-size: 1.8rem;
       color: #333;
     }
+
     #generateBtn {
       padding: 12px 24px;
       font-weight: bold;
@@ -109,13 +127,16 @@
       font-size: 16px;
       transition: background-color 0.3s, transform 0.2s;
     }
+
     #generateBtn:hover {
       background-color: #45a049;
       transform: translateY(-2px);
     }
+
     #generateBtn:active {
       transform: translateY(0);
     }
+
     .date-nav {
       display: flex;
       justify-content: center;
@@ -123,7 +144,7 @@
       background-color: #87c440;
       color: white;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
       padding: 12px 20px;
       margin: 20px auto;
       width: fit-content;
@@ -131,6 +152,7 @@
       font-weight: bold;
       font-size: 18px;
     }
+
     .date-nav button {
       background: transparent;
       border: none;
@@ -139,92 +161,111 @@
       cursor: pointer;
       transition: transform 0.2s;
     }
+
     .date-nav button:hover {
       transform: scale(1.2);
     }
+
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
+
     .section-header h3 {
       margin: 0;
       font-size: 1.2rem;
     }
+
     .view-all {
       font-size: 14px;
       color: #6ba327;
       text-decoration: none;
       transition: color 0.3s;
     }
+
     .view-all:hover {
       color: #4a721b;
       text-decoration: underline;
     }
+
     .recipe-list {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
     }
+
     .recipe-card {
       width: 340px;
       max-width: 100%;
       background: white;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .recipe-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
+
     .recipe-card img {
       width: 100%;
       height: 220px;
       object-fit: cover;
     }
+
     .recipe-card div {
       padding: 15px;
     }
+
     .recipe-card h4 {
       margin: 0 0 8px 0;
       font-size: 16px;
       color: #333;
     }
+
     .recipe-card p {
       margin: 5px 0;
     }
+
     .recipe-card p span {
       margin-right: 10px;
       font-size: 14px;
       color: #666;
     }
+
     @media (max-width: 768px) {
       .sidebar {
         width: 200px;
       }
+
       .main-content {
         margin-left: 200px;
         width: calc(100% - 200px);
         padding: 20px;
       }
+
       .recipe-card {
         width: 100%;
       }
     }
+
     @media (max-width: 576px) {
       .recipe-list {
         justify-content: center;
       }
+
       .recipe-card {
         width: 100%;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="dashboard-container">
     <aside class="sidebar">
@@ -239,7 +280,7 @@
       <nav class="sidebar-nav">
         <a href="#" class="active">Dashboard</a>
         <a href="#">Meal Plans</a>
-        <a href="#">Nutrition</a>
+        <a href="/nutrition">Nutrition</a>
         <a href="#">Grocery List</a>
         <a href="#">Profile</a>
         <a href="/info?update=true">Update Preferences</a>
@@ -262,137 +303,127 @@
     </main>
   </div>
 
-<script>
-  function logoutUser() {
-    localStorage.removeItem("nutriplanEmail");
-    localStorage.removeItem("planGenerated");
-    window.location.href = "/";
-  }
+  <script>
+    const form = document.getElementById('nutritionForm');
+    const messageDiv = document.getElementById('message');
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    const email = localStorage.getItem("nutriplanEmail");
-    if (!email) return alert("User not logged in.");
-
-    // Sidebar name/email setup
-    document.getElementById("userEmail").textContent = email;
-    const userName = email.split("@")[0];
-    document.getElementById("userName").textContent = userName.charAt(0).toUpperCase() + userName.slice(1);
-
-    let planData = null;
-    let currentIndex = 0;
-
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const todayIndex = new Date().getDay();
-    const sortedDays = [...daysOfWeek.slice(todayIndex), ...daysOfWeek.slice(0, todayIndex)];
-
-    const dateLabels = [];
-    const today = new Date();
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() + i);
-      dateLabels.push(d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }));
+    function logoutUser() {
+      localStorage.removeItem("nutriplanEmail");
+      window.location.href = "/";
     }
 
-    function updateMealPlanUI() {
-      if (!planData || !planData.dailyPlans) return;
+    document.addEventListener("DOMContentLoaded", () => {
+      const storedEmail = localStorage.getItem("nutriplanEmail") || "user@email.com";
+      document.getElementById("userEmail").textContent = storedEmail;
 
-      document.getElementById("dateLabel").textContent = dateLabels[currentIndex];
-      const dayName = sortedDays[currentIndex];
-      const dayPlan = planData.dailyPlans.find(p => p.day === dayName);
-      const container = document.getElementById("mealPlanContainer");
-      container.innerHTML = "";
+      const userName = storedEmail.split("@")[0];
+      document.getElementById("userName").textContent = userName.charAt(0).toUpperCase() + userName.slice(1);
 
-      if (!dayPlan) {
-        container.innerHTML = `<p>No meals found for ${dayName}.</p>`;
-        return;
+      // Handle form submission
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        messageDiv.textContent = '';
+
+        const formData = {
+          date: form.date.value,
+          foodItem: form.foodItem.value.trim(),
+          calories: Number(form.calories.value),
+          protein: Number(form.protein.value),
+          carbs: Number(form.carbs.value),
+          fats: Number(form.fats.value)
+        };
+
+        try {
+          const response = await fetch('/api/nutrition/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+          });
+
+          if (response.ok) {
+            messageDiv.textContent = 'Entry added successfully!';
+            form.reset();
+            loadChartData();
+          } else {
+            messageDiv.textContent = 'Failed to add entry.';
+          }
+        } catch (err) {
+          messageDiv.textContent = 'Error: ' + err.message;
+        }
+      });
+
+      async function fetchNutritionEntries() {
+        try {
+          const response = await fetch('/api/nutrition/list');
+          if (!response.ok) throw new Error('Failed to fetch nutrition entries');
+          return await response.json();
+        } catch (error) {
+          console.error(error);
+          return [];
+        }
       }
 
-      dayPlan.meals.forEach(meal => {
-        const card = `
-          <div class="recipe-card">
-            <img src="https://via.placeholder.com/300x180" alt="${meal.name}">
-            <div>
-              <h4>${meal.name}</h4>
-              <p>${meal.calories} kcal</p>
-              <p>Ingredients: ${meal.ingredients.join(", ")}</p>
-              <p>${meal.instructions.slice(0, 100)}...</p>
-            </div>
-          </div>`;
-        container.innerHTML += card;
-      });
-    }
+      function renderChart(entries) {
+        if (!entries.length) return;
 
-    document.getElementById("prevDay").addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + 7) % 7;
-      updateMealPlanUI();
-    });
+        entries.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    document.getElementById("nextDay").addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % 7;
-      updateMealPlanUI();
-    });
+        const dataByDate = {};
 
-    async function generateOrRegeneratePlan(isRegenerate = false) {
-      const endpoint = isRegenerate ? "/api/meal/regenerate-plan" : "/api/meal/generate-plan";
-      const button = document.getElementById("generateBtn");
-
-      button.disabled = true;
-      button.textContent = "Loading...";
-
-      try {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email })
+        entries.forEach(entry => {
+          const dateKey = new Date(entry.date).toLocaleDateString();
+          if (!dataByDate[dateKey]) {
+            dataByDate[dateKey] = { calories: 0, protein: 0, carbs: 0, fats: 0 };
+          }
+          dataByDate[dateKey].calories += entry.calories;
+          dataByDate[dateKey].protein += entry.protein;
+          dataByDate[dateKey].carbs += entry.carbs;
+          dataByDate[dateKey].fats += entry.fats;
         });
 
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.message);
+        const labels = Object.keys(dataByDate);
+        const calories = labels.map(date => dataByDate[date].calories);
+        const protein = labels.map(date => dataByDate[date].protein);
+        const carbs = labels.map(date => dataByDate[date].carbs);
+        const fats = labels.map(date => dataByDate[date].fats);
 
-        planData = data.weeklyMealPlan;
-        currentIndex = 0;
-        button.textContent = "Regenerate Meal Plan";
-        localStorage.setItem("planGenerated", "true");
-        updateMealPlanUI();
-      } catch (err) {
-        console.error("Meal plan error:", err);
-        alert("Failed to fetch meal plan: " + err.message);
-        button.textContent = "Generate Meal Plan";
-        localStorage.removeItem("planGenerated");
-      } finally {
-        button.disabled = false;
-      }
-    }
+        const ctx = document.getElementById('nutritionChart').getContext('2d');
 
-    document.getElementById("generateBtn").addEventListener("click", async () => {
-      const isRegenerate = localStorage.getItem("planGenerated") === "true";
-      await generateOrRegeneratePlan(isRegenerate);
-    });
-
-    async function loadLatestPlan() {
-      try {
-        const res = await fetch(`/api/user/get?email=${email}`);
-        const data = await res.json();
-        if (data?.exists) {
-          // Fetch latest meal plan from server (optional enhancement)
-          const planRes = await fetch(`/api/meal/plan?email=${email}`);
-          const planJson = await planRes.json();
-          if (planRes.ok && planJson.weeklyMealPlan?.dailyPlans?.length) {
-            planData = planJson.weeklyMealPlan;
-            document.getElementById("generateBtn").textContent = "Regenerate Meal Plan";
-            localStorage.setItem("planGenerated", "true");
-            updateMealPlanUI();
-          }
+        // ✅ Defensive destroy check
+        if (window.nutritionChart && typeof window.nutritionChart.destroy === 'function') {
+          window.nutritionChart.destroy();
         }
-      } catch (err) {
-        console.warn("No existing plan loaded.");
-        localStorage.removeItem("planGenerated");
-      }
-    }
 
-    await loadLatestPlan();
-    updateMealPlanUI();
-  });
-</script>
+        window.nutritionChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [
+              { label: 'Calories', data: calories, borderColor: '#87c440', fill: false, tension: 0.2 },
+              { label: 'Protein (g)', data: protein, borderColor: '#4caf50', fill: false, tension: 0.2 },
+              { label: 'Carbs (g)', data: carbs, borderColor: '#fbc02d', fill: false, tension: 0.2 },
+              { label: 'Fats (g)', data: fats, borderColor: '#e64a19', fill: false, tension: 0.2 },
+            ]
+          },
+          options: {
+            responsive: true,
+            interaction: { mode: 'index', intersect: false },
+            stacked: false,
+            plugins: { legend: { position: 'top' } },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+      }
+
+      async function loadChartData() {
+        const entries = await fetchNutritionEntries();
+        renderChart(entries);
+      }
+
+      loadChartData();
+    });
+  </script>
+
 </body>
+
 </html>

@@ -5,9 +5,10 @@ const passport = require('passport');
 const path = require('path');
 
 // Routes
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const mealRoutes = require('./routes/mealRoutes'); // ✅ Meal plan routes
+const authRoutes = require('./routes/authroutes');
+const userRoutes = require('./routes/userroutes');
+const mealRoutes = require('./routes/mealroutes'); // ✅ Meal plan routes
+const nutritionRoutes = require('./routes/nutritionRoutes'); 
 const initPassport = require('./config/passport');
 
 const app = express();
@@ -37,6 +38,7 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'views', 'homepage.
 app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'views', 'login.html')));
 app.get('/register', (req, res) => res.sendFile(path.join(__dirname, 'views', 'register.html')));
 app.get('/info', (req, res) => res.sendFile(path.join(__dirname, 'views', 'info.html')));
+app.get('/nutrition', (req, res) => res.sendFile(path.join(__dirname, 'views', 'nutrition.html')));
 app.get('/dashboard', (req, res) => res.sendFile(path.join(__dirname, 'views', 'dashboard.html')));
 app.get('/faq', (req, res) => res.sendFile(path.join(__dirname, 'views', 'faq.html')));
 app.get('/grocerylist', (req, res) => res.sendFile(path.join(__dirname, 'views', 'grocerylist.html')));
@@ -45,6 +47,7 @@ app.get('/grocerylist', (req, res) => res.sendFile(path.join(__dirname, 'views',
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/meal', mealRoutes); // ✅ Enables /api/meal/generate-plan and /regenerate-plan
+app.use('/api/nutrition', nutritionRoutes);
 
 // Catch-all fallback for undefined routes
 app.use((req, res) => {
