@@ -1,0 +1,50 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs
+*.log
+*.csv
+*.out
+*.pid
+*.gz
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# dotenv environment variables
+.env
+.env.*
+
+# Jest
+jest-*
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cypress
+cypress/screenshots/
+cypress/videos/
+
+# Docker
+*.tar
+*.img
+docker-compose.override.yml
+
+# Jenkins
+jenkins_home/
