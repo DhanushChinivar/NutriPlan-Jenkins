@@ -11,3 +11,9 @@ exports.adjustCalories = (bmr, goal, activity) => {
   if (goal === 'muscle_gain') return base + 500;
   return base;
 };
+
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = { add };
