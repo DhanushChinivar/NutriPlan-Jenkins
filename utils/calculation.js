@@ -12,8 +12,3 @@ exports.adjustCalories = (bmr, goal, activity) => {
   return base;
 };
 
-function add(a, b) {
-  return a + b;
-}
-
-module.exports = { add };
