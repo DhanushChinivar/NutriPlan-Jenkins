@@ -24,6 +24,20 @@ pipeline {
             }
         }
 
+        stage('Code Quality') {
+            steps {
+                echo "Running ESLint for code quality..."
+                sh 'npx eslint . || true'
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                echo "Running npm audit for security..."
+                sh 'npm audit --audit-level=moderate || true'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker image..."
@@ -40,19 +54,26 @@ pipeline {
 
         stage('Release Tag') {
             steps {
-                echo "Tagging release v1.0.0"
+                echo "Tagging release version..."
                 sh 'git tag v1.0.0 || true'
                 sh 'git push origin --tags || true'
+            }
+        }
+
+        stage('Monitoring') {
+            steps {
+                echo "Simulating monitoring stage using uptime..."
+                sh 'uptime'
             }
         }
     }
 
     post {
         success {
-            echo '🎉 Build Successful'
+            echo '🎉 Pipeline completed successfully!'
         }
         failure {
-            echo '❌ Build Failed'
+            echo '❌ Pipeline failed.'
         }
     }
 }
