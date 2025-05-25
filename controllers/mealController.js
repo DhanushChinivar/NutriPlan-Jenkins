@@ -1,7 +1,7 @@
 const Meal = require('../models/meals');
 const User = require('../models/user');
 const WeeklyMealPlan = require('../models/weeklyMealPlan');
-const { calculateBMR, adjustCalories } = require('../utils/calculation');
+const { calculateBMR } = require('../utils/calculation');
 
 function sumNutrients(meals) {
   let totalProtein = 0, totalFat = 0, totalCarbs = 0;
