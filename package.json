@@ -4,7 +4,7 @@
   "description": "Meal Planner",
   "main": "server.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
     "test": "jest"
   },
   "author": "",
