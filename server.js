@@ -4,9 +4,9 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/authroutes');
 const userRoutes = require('./routes/userRoutes');
-const mealRoutes = require('./routes/mealRoutes');
+const mealRoutes = require('./routes/mealroutes');
 const initPassport = require('./config/passport');
 const groceryRoutes = require('./routes/groceryRoutes'); // ✅ Grocery list route
 
