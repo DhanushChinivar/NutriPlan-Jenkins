@@ -12,8 +12,9 @@ const groceryRoutes = require('./routes/groceryRoutes'); // ✅ Grocery list rou
 
 const app = express(); // ✅ MUST be defined before any app.use()
 
-// Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/nutriplan")
+// ✅ Docker-aware MongoDB connection
+const mongoURL = process.env.MONGO_URL || "mongodb://localhost:27017/nutriplan";
+mongoose.connect(mongoURL)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
@@ -40,6 +41,14 @@ app.get('/info', (req, res) => res.sendFile(path.join(__dirname, 'views', 'info.
 app.get('/dashboard', (req, res) => res.sendFile(path.join(__dirname, 'views', 'dashboard.html')));
 app.get('/faq', (req, res) => res.sendFile(path.join(__dirname, 'views', 'faq.html')));
 app.get('/grocerylist', (req, res) => res.sendFile(path.join(__dirname, 'views', 'grocerylist.html')));
+
+// ✅ 8.2HD Student Identity API
+app.get('/api/student', (req, res) => {
+  res.json({
+    name: "Dhanush Chinivar",
+    studentId: "123456789"
+  });
+});
 
 // API Routes
 app.use('/api/auth', authRoutes);
